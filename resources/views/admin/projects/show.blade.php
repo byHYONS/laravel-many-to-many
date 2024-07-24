@@ -62,9 +62,15 @@
                         <li class="mb-3">
                             <span>Materiale Creato: </span>{{$project->material_created}}
                         </li>
+
+
+                        {{--todo CANCELLO DA TABELLA PROJECTS E CREO TABELLA TECHNOLOGY --}}
                         <li class="mb-3">
-                            <span>Tecnologia Usata: </span>{{$project->technologies_used}}
+                            <span>Tecnologia Usata: </span>{{$project?->technologies_used ?: 'AGGIUNGERE DA TABELLA TECHNOLOGY'}}
                         </li>
+                        {{--TODO --}}
+
+
                         <li class="mb-3">
                             <span>Tipo Cliente: </span>{{$project->type?->title ?: 'Tipologia cliente non definita'}}
                         </li>
