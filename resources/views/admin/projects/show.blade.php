@@ -62,15 +62,15 @@
                         <li class="mb-3">
                             <span>Materiale Creato: </span>{{$project->material_created}}
                         </li>
-
-
-                        {{--todo CANCELLO DA TABELLA PROJECTS E CREO TABELLA TECHNOLOGY --}}
+                        @forelse ($project->technologies as $technology)
                         <li class="mb-3">
-                            <span>Tecnologia Usata: </span>{{$project->technologies ?: 'AGGIUNGERE DA TABELLA TECHNOLOGY'}}
+                            <span>Tecnologia Usata: </span>{{ $technology->name }}
                         </li>
-                        {{--TODO --}}
-
-
+                        @empty
+                        <li class="mb-3">
+                            <span>Tecnologia Usata: </span> Nessuna tecnologia selezionata
+                        </li>
+                        @endforelse
                         <li class="mb-3">
                             <span>Tipo Cliente: </span>{{$project->type?->title ?: 'Tipologia cliente non definita'}}
                         </li>

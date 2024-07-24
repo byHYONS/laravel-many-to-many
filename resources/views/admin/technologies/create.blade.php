@@ -11,7 +11,7 @@
 
         <div class="add-project">
 
-            <h2>Aggiungi Tecnologie Usata:</h2>
+            <h2>Aggiungi Tecnologie:</h2>
             <hr class="mt-25 mb-50">
 
             {{--? messagio di avviso degli errori nella compilazione del form --}}

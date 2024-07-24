@@ -59,12 +59,15 @@ class ProjectController extends Controller
         //? aggiungo select della tabella relazionata types:
         $project->type_id = $data['type_id'];
 
-        //? aggiungo select della tabella relazionata Technologies:
-        if (isset($data['technology_id']) && is_array($data['technology_id'])) {
-            $project->technologies()->attach($data['technology_id']);
-        }
-     
+        // if (isset($data['technology_id']) && is_array($data['technology_id'])) {
+            // }
+            
         $project->save();
+            
+            
+        //? aggiungo select della tabella relazionata Technologies:
+        $technologyData = array_fill_keys([$data['technology_id']], ['created_at' => now(), 'updated_at' => now()]);
+        $project->technologies()->attach($technologyData);
 
         return redirect()->route('admin.projects.show', $project);
 
@@ -75,7 +78,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('technologies');
+        // $project->load('technologies');
         return view('admin.projects.show', compact('project'));
     }
 
@@ -114,12 +117,14 @@ class ProjectController extends Controller
         //? aggiungo select della tabella relazionata types:
         $project->type_id = $data['type_id'];
 
-        //? aggiungo select della tabella relazionata Technologies:
-        if (isset($data['technology_id']) && is_array($data['technology_id'])) {
-            $project->technologies()->attach($data['technology_id']);
-        }
-       
+        // if (isset($data['technology_id']) && is_array($data['technology_id'])) {
+        // }
+        
         $project->save();
+
+        //? aggiungo select della tabella relazionata Technologies:
+        $technologyData = array_fill_keys([$data['technology_id']], ['updated_at' => now()]);
+        $project->technologies()->sync($technologyData);
 
         return redirect()->route('admin.projects.show', $project);
 

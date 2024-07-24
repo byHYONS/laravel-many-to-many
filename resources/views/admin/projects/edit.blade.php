@@ -132,9 +132,9 @@
                 <div class="mb-3">
                     <label for="technology_id" class="form-label">Tecnologie Usate: </label>
                     <select name="technology_id" id="technology_id" class="form-select @if($errors->get('technology_id')) is-invalid @endif">
-                        <option value="">Seleziona la tecnologie</option>
+                        <option value="">Seleziona la tecnologia</option>
                         @foreach ($technologies as $technology) 
-                            <option value="{{$technology->id}}" @if (old('technology_id', $technology?->id) == $technology->id) selected @endif>
+                            <option value="{{$technology->id}}" {{in_array($technology->id, old('technology_id', $project->technologies->pluck('id')->toArray())) ? 'selected' : ''}}>
                                 {{$technology->name}}
                             </option>
                         @endforeach
