@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
@@ -29,8 +30,9 @@ class ProjectController extends Controller
     {
         //? passo le types della tabella relazionata:
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -56,7 +58,12 @@ class ProjectController extends Controller
 
         //? aggiungo select della tabella relazionata types:
         $project->type_id = $data['type_id'];
-       
+
+        //? aggiungo select della tabella relazionata Technologies:
+        if (isset($data['technology_id']) && is_array($data['technology_id'])) {
+            $project->technologies()->attach($data['technology_id']);
+        }
+     
         $project->save();
 
         return redirect()->route('admin.projects.show', $project);
@@ -68,6 +75,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $project->load('technologies');
         return view('admin.projects.show', compact('project'));
     }
 
@@ -78,8 +86,9 @@ class ProjectController extends Controller
     {
         //? passo le types della tabella relazionata:
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -104,6 +113,11 @@ class ProjectController extends Controller
 
         //? aggiungo select della tabella relazionata types:
         $project->type_id = $data['type_id'];
+
+        //? aggiungo select della tabella relazionata Technologies:
+        if (isset($data['technology_id']) && is_array($data['technology_id'])) {
+            $project->technologies()->attach($data['technology_id']);
+        }
        
         $project->save();
 

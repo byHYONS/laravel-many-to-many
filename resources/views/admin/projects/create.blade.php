@@ -128,10 +128,17 @@
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="technologies_used" class="form-label">Tecnologie Usate: </label>
-                    <input type="text" class="form-control @if($errors->get('technologies_used')) is-invalid @endif" value="{{ old('technologies_used')}}" id="technologies_used" name="technologies_used">
-                    @if ($errors->get('technologies_used'))
-                        @foreach ($errors->get('technologies_used') as $message)
+                    <label for="technology_id" class="form-label">Tecnologie Usate: </label>
+                    <select name="technology_id" id="technology_id" class="form-select @if($errors->get('technology_id')) is-invalid @endif">
+                        <option value="">Seleziona la tecnologie</option>
+                        @foreach ($technologies as $technology) 
+                            <option value="{{$technology->id}}" @if (old('technology_id') == $technology->id) selected @endif>
+                                {{$technology->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                    @if ($errors->get('technology_id'))
+                        @foreach ($errors->get('technology_id') as $message)
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>

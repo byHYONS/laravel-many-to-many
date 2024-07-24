@@ -43,6 +43,8 @@ class UpdateProjectRequest extends FormRequest
             'project_grade' => 'nullable|numeric|min:1|max:10',
             //? valido la types:
             'type_id' => 'nullable|exists:types,id',
+            //? valido la technologies:
+            'technology_id' => 'nullable|exists:technologies,id',
         ];
     }
 
@@ -75,6 +77,8 @@ class UpdateProjectRequest extends FormRequest
             'project_grade.max' => 'Inserisci un numero da 1 a 10',
             //? valido la types:
             'type_id.exists' => 'Questa tabella non esiste',
+            //? valido la technologies:
+            'technology_id.exist' => 'Questa tabella non esiste',
         ];
     }
 }

@@ -66,7 +66,7 @@
 
                         {{--todo CANCELLO DA TABELLA PROJECTS E CREO TABELLA TECHNOLOGY --}}
                         <li class="mb-3">
-                            <span>Tecnologia Usata: </span>{{$project?->technologies_used ?: 'AGGIUNGERE DA TABELLA TECHNOLOGY'}}
+                            <span>Tecnologia Usata: </span>{{$project->technologies ?: 'AGGIUNGERE DA TABELLA TECHNOLOGY'}}
                         </li>
                         {{--TODO --}}
 
