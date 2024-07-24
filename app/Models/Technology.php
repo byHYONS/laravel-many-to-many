@@ -9,6 +9,9 @@ class Technology extends Model
 {
     use HasFactory;
 
+    //? mass update:
+    protected $guarded = ['id'];
+
     //? creo relazione molti a molti con Project:
     public function projects() 
     {
