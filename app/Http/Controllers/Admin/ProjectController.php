@@ -142,8 +142,13 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        //? cancelliamo eventuali relazioni in caso di cancellazione progetto:
+        $project->technologies()->detach();
+
         $project->delete();
 
+        //? se associata un immagine al progetto cancellato, cancella anche l'immagine:
         if($project->image) {
             Storage::delete($project->image);
         }
