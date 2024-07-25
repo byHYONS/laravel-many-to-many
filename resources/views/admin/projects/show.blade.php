@@ -62,13 +62,12 @@
                         <li class="mb-3">
                             <span>Materiale Creato: </span>{{$project->material_created}}
                         </li>
-                        @forelse ($project->technologies as $technology)
                         <li class="mb-3">
-                            <span>Tecnologia Usata: </span>{{ $technology->name }}
-                        </li>
-                        @empty
-                        <li class="mb-3">
-                            <span>Tecnologia Usata: </span> Nessuna tecnologia selezionata
+                            <span>Tecnologia Usata: </span>
+                            @forelse ($project->technologies as $technology)
+                            {{ $technology->name }}
+                            @empty
+                            Nessuna tecnologia selezionata
                         </li>
                         @endforelse
                         <li class="mb-3">

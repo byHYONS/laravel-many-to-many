@@ -130,15 +130,22 @@
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="technology_id" class="form-label">Tecnologie Usate: </label>
-                    <select name="technology_id" id="technology_id" class="form-select @if($errors->get('technology_id')) is-invalid @endif">
-                        <option value="">Seleziona la tecnologia</option>
-                        @foreach ($technologies as $technology) 
-                            <option value="{{$technology->id}}" {{in_array($technology->id, old('technology_id', $project->technologies->pluck('id')->toArray())) ? 'selected' : ''}}>
-                                {{$technology->name}}
-                            </option>
+                    <legend>Seleziona le Tecnologie: </legend>
+                    <fieldset>
+                        @foreach ($technologies as $technology)
+                        <div class="form-check form-check-inline">
+                            @if ($errors->any())
+                            <input type="checkbox" class="form-check-input" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]"
+                            {{in_array($technology->id, old('technologies', $project->technologies)) ? 'checked' : ''}}>
+                            <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                            @else
+                            <input type="checkbox" class="form-check-input" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]"
+                            {{$project->technologies->contains($technology) ? 'checked' : ''}}>
+                            <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                            @endif
+                        </div>                   
                         @endforeach
-                    </select>
+                    </fieldset>
                     @if ($errors->get('technology_id'))
                         @foreach ($errors->get('technology_id') as $message)
                             <div class="invalid-feedback">
@@ -147,6 +154,7 @@
                         @endforeach                        
                     @endif
                 </div>
+
                 <div class="mb-3">
                     <label for="collaborations" class="form-label">Collaborazioni: </label>
                     <input type="text" class="form-control @if($errors->get('collaborations')) is-invalid @endif" value="{{ old('collaborations', $project->collaborations)}}" id="collaborations" name="collaborations">

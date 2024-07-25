@@ -128,15 +128,16 @@
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="technology_id" class="form-label">Tecnologie Usate: </label>
-                    <select name="technology_id" id="technology_id" class="form-select @if($errors->get('technology_id')) is-invalid @endif">
-                        <option value="">Seleziona la tecnologie</option>
-                        @foreach ($technologies as $technology) 
-                            <option value="{{$technology->id}}" @if (old('technology_id') == $technology->id) selected @endif>
-                                {{$technology->name}}
-                            </option>
-                        @endforeach
-                    </select>
+                    <legend>Seleziona le Tecnologie: </legend>
+                <fieldset>
+                    @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="technology-{{$technology->id}}" value="{{$technology->id}}" name="technologies[]"
+                    {{in_array($technology->id, old('technologies', [])) ? 'checked' : ''}}>
+                    <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                    </div>                   
+                    @endforeach
+                </fieldset>
                     @if ($errors->get('technology_id'))
                         @foreach ($errors->get('technology_id') as $message)
                             <div class="invalid-feedback">

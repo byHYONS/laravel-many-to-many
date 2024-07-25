@@ -66,8 +66,11 @@ class ProjectController extends Controller
             
             
         //? aggiungo select della tabella relazionata Technologies:
-        $technologyData = array_fill_keys([$data['technology_id']], ['created_at' => now(), 'updated_at' => now()]);
-        $project->technologies()->attach($technologyData);
+        if ($request->has('technologies')) {
+       
+            $technologyData = array_fill_keys($data['technologies'], ['updated_at' => now(), 'updated_at' => now()]);
+            $project->technologies()->attach($technologyData);
+        }
 
         return redirect()->route('admin.projects.show', $project);
 
@@ -123,8 +126,11 @@ class ProjectController extends Controller
         $project->save();
 
         //? aggiungo select della tabella relazionata Technologies:
-        $technologyData = array_fill_keys([$data['technology_id']], ['updated_at' => now()]);
-        $project->technologies()->sync($technologyData);
+        if ($request->has('technologies')) {
+       
+            $technologyData = array_fill_keys($data['technologies'], ['updated_at' => now()]);
+            $project->technologies()->sync($technologyData);
+        }
 
         return redirect()->route('admin.projects.show', $project);
 

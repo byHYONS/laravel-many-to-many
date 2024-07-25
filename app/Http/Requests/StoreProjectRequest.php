@@ -37,7 +37,8 @@ class StoreProjectRequest extends FormRequest
             //? valido la types:
             'type_id' => 'nullable|exists:types,id',
             //? valido la technologies:
-            'technology_id' => 'nullable|exists:technologies,id',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'exists:technologies,id',
         ];
     }
 

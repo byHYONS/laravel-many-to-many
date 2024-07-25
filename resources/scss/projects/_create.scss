@@ -34,6 +34,23 @@
             font-weight: 500;
         }
 
+        legend {
+            color: $h_1;
+            font-weight: 500;
+        }
+        fieldset {
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid $text2;
+            margin: 20px 0;
+
+            label {
+                color: $text1;
+                font-weight: 400;
+                font-size: 16px;
+            }
+        }
+
         .submit {
             margin-top: 20px;
             border: unset;
