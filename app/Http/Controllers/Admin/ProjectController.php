@@ -68,7 +68,7 @@ class ProjectController extends Controller
         //? aggiungo select della tabella relazionata Technologies:
         if ($request->has('technologies')) {
        
-            $technologyData = array_fill_keys($data['technologies'], ['updated_at' => now(), 'updated_at' => now()]);
+            $technologyData = array_fill_keys($data['technologies'], ['create_at' => now(), 'updated_at' => now()]);
             $project->technologies()->attach($technologyData);
         }
 
